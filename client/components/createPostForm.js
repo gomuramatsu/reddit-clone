@@ -6,26 +6,58 @@ import Nav from 'react-bootstrap/Nav'
 class CreatePostForm extends Component {
     constructor(props) {
       super(props);
-      this.state = {showTextForm: true, 
-                    showURLForm: false};
+      this.state = {type: 'text'};
 
       this.updateFormType = this.updateFormType.bind(this);
+      this.renderForm = this.renderForm.bind(this);
     }
 
     updateFormType(type){
       if (type == 'text'){
         this.setState(state => ({
           showTextForm: true,
-          showURLForm: false
+          showURLForm: false,
+          type: 'text'
         }));
-      } else if (type == 'url'){
+      } else if (type == 'link'){
         this.setState(state => ({
           showTextForm: false,
-          showURLForm: true
+          showURLForm: true,
+          type: 'link'
         }));
       }
-      
-      console.log('type = ' + type);
+    }
+
+    renderForm() {
+      if (this.state.type == 'text') {
+        return (
+          <Form className="formPadding">
+              <Form.Group controlId="formTitle">
+                  <Form.Control type="text" placeholder="Enter Title" />
+              </Form.Group>
+              <Form.Group controlId="formBody"> 
+                  <Form.Control as="textarea" rows="3" placeholder="Text (Optional)" />
+              </Form.Group>
+              <Button variant="primary" type="submit">
+                  Submit
+              </Button>
+            </Form>
+        )
+      } else if (this.state.type == 'link') {
+        return (
+          <Form className="formPadding">
+            <Form.Group controlId="formTitle">
+                <Form.Control type="text" placeholder="Enter Title" />
+            </Form.Group>
+            <Form.Group controlId="formBody">
+                <Form.Control type="text" placeholder="Enter URL" />
+            </Form.Group>
+            <Button variant="primary" type="submit">
+                Submit
+            </Button>
+          </Form>
+        )
+      }
     }
 
     render() {
@@ -37,36 +69,11 @@ class CreatePostForm extends Component {
                       <Nav.Link eventKey="createTextPostFormSelected" onSelect={() => this.updateFormType('text')}>Text</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                      <Nav.Link eventKey="createURLPostFormSelected" onSelect={() => this.updateFormType('url')}>Link</Nav.Link>
+                      <Nav.Link eventKey="createLinkPostFormSelected" onSelect={() => this.updateFormType('link')}>Link</Nav.Link>
                     </Nav.Item>
                   </Nav>
                 </div>
-                {this.state.showTextForm && <Form className="formPadding">
-                      <Form.Group controlId="formTitle">
-                          <Form.Control type="text" placeholder="Enter Title" />
-                      </Form.Group>
-                      <Form.Group controlId="formBody"> 
-                          <Form.Control as="textarea" rows="3" placeholder="Text (Optional)" />
-                      </Form.Group>
-                      <Button variant="primary" type="submit">
-                          Submit
-                      </Button>
-                  </Form>
-                }
-                {this.state.showURLForm && <Form className="formPadding">
-                      <Form.Group controlId="formTitle">
-                          <Form.Label>Title</Form.Label>
-                          <Form.Control type="text" placeholder="Enter Title" />
-                      </Form.Group>
-                      <Form.Group controlId="formBody">
-                          <Form.Label>URL</Form.Label>
-                          <Form.Control type="text" placeholder="Enter URL" />
-                      </Form.Group>
-                      <Button variant="primary" type="submit">
-                          Submit
-                      </Button>
-                  </Form>
-                }
+                {this.renderForm()}
             </div>
         )
     }
