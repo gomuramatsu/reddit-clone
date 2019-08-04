@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import Nav from 'react-bootstrap/Nav'
 
 class CreatePostForm extends Component {
     constructor(props) {
@@ -30,14 +31,16 @@ class CreatePostForm extends Component {
     render() {
         return (
             <div>
-                <ul class="nav justify-content-center createPostNavPadding">
-                    <li class="nav-item">
-                        <a onclick={() => this.updateFormType('text')} class="nav-link">Text</a>
-                    </li>
-                    <li class="nav-item">
-                        <a onclick={() => this.updateFormType('url')} class="nav-link">URL</a>
-                    </li>
-                </ul>
+                <div className="createPostNav">
+                  <Nav fill variant="pills">
+                    <Nav.Item>
+                      <Nav.Link eventKey="createTextPostFormSelected" onSelect={() => this.updateFormType('text')}>Text</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                      <Nav.Link eventKey="createURLPostFormSelected" onSelect={() => this.updateFormType('url')}>Link</Nav.Link>
+                    </Nav.Item>
+                  </Nav>
+                </div>
                 {this.state.showTextForm && <Form className="formPadding">
                       <Form.Group controlId="formTitle">
                           <Form.Control type="text" placeholder="Enter Title" />
