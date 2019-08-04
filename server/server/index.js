@@ -6,12 +6,24 @@ const { ApolloServer, gql } = require('apollo-server');
 const posts = [
   {
     title: 'Welcome to my reddit clone!',
-    body: 'insert body here',
+    body: 'insert body here'
   },
   {
-    title: 'another one',
-    body: 'another body',
+    title: 'Google search takes 7 seconds on certain queries',
+    url: 'https://twitter.com/liron/status/1157327854033674241'
   },
+  {
+    title: '~Another text post~',
+    body: 'another body'
+  },
+  {
+    title: 'Bill Gates Resume (1974)',
+    url: 'https://image.cnbcfm.com/api/v1/image/104645467-BillGatesearlyresume.jpg?v=1529475934'
+  },
+  {
+    title: 'Why Developers Hate Coding Skills Tests and What Hiring Managers Can Do',
+    url: 'https://hackernoon.com/why-developers-hate-coding-skills-8m6u3za1'
+  }
 ];
 
 // Type definitions define the "shape" of your data and specify

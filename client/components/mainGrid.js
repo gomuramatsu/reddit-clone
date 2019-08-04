@@ -20,7 +20,14 @@ const MainGridPost = () => (
       if (error) return <p>Error :(</p>;
 
       return data.posts.map(({ title, body }) => (
-        <tr><td><Link href="/post"><a>{title}</a></Link></td></tr>
+        <tr>
+          <td  className="mainGridTh">
+            <Link href="/post">
+              <a className="mainGridTitle">{title}</a>
+            </Link>
+            <div className="mainGridDetails">small details and link to comments</div>
+          </td>
+        </tr>
       ));
     }}
   </Query>
@@ -29,18 +36,9 @@ const MainGridPost = () => (
 class MainGrid extends Component {
   render() {
     return (
-      <Table bordered hover>
+      <Table bordered hover className="mainGrid" size="sm">
         <tbody>
           <MainGridPost />
-          {/* <tr>
-          <td>1</td>
-          </tr>
-          <tr>
-          <td>2</td>
-          </tr>
-          <tr>
-          <td>3</td>
-          </tr> */}
         </tbody>
       </Table>
     )
