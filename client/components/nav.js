@@ -17,6 +17,7 @@ class MainNavBar extends Component {
 						<Button variant="outline-primary">Search</Button>
 					</Form>
 					<Nav className="ml-auto">
+						<Nav.Link href="/createPost">Create Post</Nav.Link>
 						<Nav.Link href="/login">Log In</Nav.Link>
 						<Nav.Link href="/signup">Sign up</Nav.Link>
 					</Nav>
