@@ -3,6 +3,7 @@ import Table from 'react-bootstrap/Table';
 import { ApolloProvider, Query } from "react-apollo";
 import gql from "graphql-tag";
 import Link from 'next/link';
+import styles from "./style";
 
 const MainGridPost = () => (
   <Query
@@ -22,12 +23,11 @@ const MainGridPost = () => (
 
       return data.getFrontPage.map(({ title, id }) => (
         <tr>
-          <td  className="mainGridTh">
-            {/* <Link href="/post"> */}
+          <td  style={styles.MainGridTh}>
             <Link href={{ pathname: '/post', query: { id: id }}}>
-              <a className="mainGridTitle">{title}{id}</a>
+              <a style={styles.MainGridTitle}>{title}{id}</a>
             </Link>
-            <div className="mainGridDetails">small details and link to comments</div>
+            <div style={styles.MainGridDetails}>small details and link to comments</div>
           </td>
         </tr>
       ));
@@ -38,7 +38,7 @@ const MainGridPost = () => (
 class MainGrid extends Component {
   render() {
     return (
-      <Table bordered hover className="mainGrid" size="sm">
+      <Table bordered hover style={styles.MainGrid} size="sm">
         <tbody>
           <MainGridPost />
         </tbody>
@@ -48,3 +48,4 @@ class MainGrid extends Component {
 }
 
 export default MainGrid; 
+

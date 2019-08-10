@@ -21,30 +21,6 @@ const GET_POST = gql`
   }
 `;
 
-// const GET_POST = gql`
-//   query getPost ($postId: ID!){
-//     getPost (id: $postId) {
-//       title
-//       body
-//     }
-//   }
-// `;
-
-// const PostCard = ({postId}) => (
-//   <Query query={GET_POST} variables={{ postId }}>
-//     {({ loading, error, data }) => {
-//       if (loading) return <p>Loading...</p>;
-//       if (error) return <p>Error :(</p>;
-
-//       return data.posts.map(({ title, id }) => (
-//         <div>
-//           {title} {id}
-//         </div>
-//       ));
-//     }}
-//   </Query>
-// );
-
 function PostCard ({postId}){
   const { loading, error, data } = useQuery(GET_POST, {
     variables: {postId},
@@ -54,11 +30,28 @@ function PostCard ({postId}){
   if (error) return <p>Error :(</p>;
   
   console.log({data});
+  console.log(data.getPost.title);
 
-  return (
-    <div>{data.getPost.title}{data.getPost.body}</div>
-  );
+  return renderPost(data.getPost.title, data.getPost.body);
+
+  // return (
+  //   <div>{data.getPost.title}{data.getPost.body}</div>
+  //   // <div>{postTitle}</div>
+  // );
 };
+
+function renderPost(title, body) {
+  return (
+    <Card>
+      <Card.Body>
+        <Card.Title>{title}</Card.Title>
+        <Card.Text>
+          {body}
+        </Card.Text>
+      </Card.Body>
+    </Card>
+  );
+}
 
 class Post extends Component {
   static getInitialProps ({ query: { id } }) {
@@ -84,24 +77,6 @@ class Post extends Component {
       </ApolloProvider>
     )
   }
-
-  // render() {
-  //   return (
-  //     <ApolloProvider client={client}>
-  //       <link
-  //           rel="stylesheet"
-  //           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-  //           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-  //           crossorigin="anonymous"
-  //       />
-  //       <MainNavBar></MainNavBar>
-  //       <Card>
-  //           <PostCard postId={this.props.id}></PostCard>
-  //           {this.props.id}
-  //       </Card>
-  //     </ApolloProvider>
-  //   )
-  // }
 }
 
 export default Post;
