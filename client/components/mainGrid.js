@@ -25,9 +25,11 @@ const MainGridPost = () => (
         <tr>
           <td  style={styles.MainGridTh}>
             <Link href={{ pathname: '/post', query: { id: id }}}>
-              <a style={styles.MainGridTitle}>{title}{id}</a>
+              <a style={styles.MainGridTitle}>{title}</a>
             </Link>
-            <div style={styles.MainGridDetails}>small details and link to comments</div>
+            <Link href={{ pathname: '/post', query: { id: id }}}>
+              <div style={styles.MainGridDetails}>small details and link to comments</div>
+            </Link>
           </td>
         </tr>
       ));
