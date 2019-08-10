@@ -1,4 +1,5 @@
 const { ApolloServer, gql } = require('apollo-server');
+const { find, filter } = require('lodash');
 
 // This is a (sample) collection of books we'll be able to query
 // the GraphQL server for.  A more complete example might fetch
@@ -36,14 +37,20 @@ const posts = [
 const typeDefs = gql`
   # The "Query" type is the root of all GraphQL queries.
   type Query {
-    posts: [Post]
+    getFrontPage: [Post]
+    getPost(id: String!): Post
   }
-
+  
   type Post {
     id: String
-    title: String!
+    title: String
     url: String
     body: String
+  }
+
+  type Author {
+    id: String
+    name: String
   }
 `;
 
@@ -51,8 +58,11 @@ const typeDefs = gql`
 // schema.  We'll retrieve books from the "books" array above.
 const resolvers = {
   Query: {
-    posts: () => posts,
-  },
+    getFrontPage: () => posts,
+    getPost(obj, args, context, info) {
+      return find(posts, { id: args.id });
+    }
+  }
 };
 
 // In the most basic sense, the ApolloServer can be started

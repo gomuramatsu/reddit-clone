@@ -8,7 +8,8 @@ const MainGridPost = () => (
   <Query
     query={gql`
       {
-        posts {
+        getFrontPage {
+          id
           title
           body
         }
@@ -19,11 +20,12 @@ const MainGridPost = () => (
       if (loading) return <p>Loading...</p>;
       if (error) return <p>Error :(</p>;
 
-      return data.posts.map(({ title, body }) => (
+      return data.getFrontPage.map(({ title, id }) => (
         <tr>
           <td  className="mainGridTh">
-            <Link href="/post">
-              <a className="mainGridTitle">{title}</a>
+            {/* <Link href="/post"> */}
+            <Link href={{ pathname: '/post', query: { id: id }}}>
+              <a className="mainGridTitle">{title}{id}</a>
             </Link>
             <div className="mainGridDetails">small details and link to comments</div>
           </td>
