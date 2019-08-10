@@ -3,12 +3,14 @@ import Table from 'react-bootstrap/Table';
 import { ApolloProvider, Query } from "react-apollo";
 import gql from "graphql-tag";
 import Link from 'next/link';
+import styles from "./style";
 
 const MainGridPost = () => (
   <Query
     query={gql`
       {
-        posts {
+        getFrontPage {
+          id
           title
           body
         }
@@ -19,13 +21,15 @@ const MainGridPost = () => (
       if (loading) return <p>Loading...</p>;
       if (error) return <p>Error :(</p>;
 
-      return data.posts.map(({ title, body }) => (
+      return data.getFrontPage.map(({ title, id }) => (
         <tr>
-          <td  className="mainGridTh">
-            <Link href="/post">
-              <a className="mainGridTitle">{title}</a>
+          <td  style={styles.MainGridTh}>
+            <Link href={{ pathname: '/post', query: { id: id }}}>
+              <a style={styles.MainGridTitle}>{title}</a>
             </Link>
-            <div className="mainGridDetails">small details and link to comments</div>
+            <Link href={{ pathname: '/post', query: { id: id }}}>
+              <div style={styles.MainGridDetails}>small details and link to comments</div>
+            </Link>
           </td>
         </tr>
       ));
@@ -36,7 +40,7 @@ const MainGridPost = () => (
 class MainGrid extends Component {
   render() {
     return (
-      <Table bordered hover className="mainGrid" size="sm">
+      <Table bordered hover style={styles.MainGrid} size="sm">
         <tbody>
           <MainGridPost />
         </tbody>
@@ -46,3 +50,4 @@ class MainGrid extends Component {
 }
 
 export default MainGrid; 
+

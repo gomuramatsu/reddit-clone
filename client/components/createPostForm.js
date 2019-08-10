@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Nav from 'react-bootstrap/Nav'
+import styles from "./style";
 
 class CreatePostForm extends Component {
     constructor(props) {
@@ -31,7 +32,7 @@ class CreatePostForm extends Component {
     renderForm() {
       if (this.state.type == 'text') {
         return (
-          <Form className="formPadding">
+          <Form style={styles.FormPadding}>
               <Form.Group controlId="formTitle">
                   <Form.Control type="text" placeholder="Enter Title" />
               </Form.Group>
@@ -45,7 +46,7 @@ class CreatePostForm extends Component {
         )
       } else if (this.state.type == 'link') {
         return (
-          <Form className="formPadding">
+          <Form style={styles.FormPadding}>
             <Form.Group controlId="formTitle">
                 <Form.Control type="text" placeholder="Enter Title" />
             </Form.Group>
@@ -63,7 +64,7 @@ class CreatePostForm extends Component {
     render() {
         return (
             <div>
-                <div className="createPostNav">
+                <div style={styles.CreatePostNavStyle}>
                   <Nav fill variant="pills">
                     <Nav.Item>
                       <Nav.Link eventKey="createTextPostFormSelected" onSelect={() => this.updateFormType('text')}>Text</Nav.Link>

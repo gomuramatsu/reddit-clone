@@ -1,7 +1,6 @@
 import React from "react";
 import Home from "./home";
 import ApolloClient from "apollo-boost";
-import { gql } from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 global.fetch = require('node-fetch');
 
