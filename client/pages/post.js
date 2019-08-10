@@ -6,6 +6,7 @@ import ApolloClient from "apollo-boost";
 import { useQuery } from '@apollo/react-hooks';
 import gql from "graphql-tag";
 import { ApolloProvider as ApolloHooksProvider } from '@apollo/react-hooks' // https://github.com/apollographql/apollo-client/issues/2042#issuecomment-509041949
+import styles from "../components/style";
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/"
@@ -33,20 +34,32 @@ function PostCard ({postId}){
   console.log(data.getPost.title);
 
   return renderPost(data.getPost.title, data.getPost.body);
+};
 
-  // return (
-  //   <div>{data.getPost.title}{data.getPost.body}</div>
-  //   // <div>{postTitle}</div>
-  // );
+function CommentCard (){
+  return renderComments();
 };
 
 function renderPost(title, body) {
   return (
-    <Card>
+    <Card style={styles.PostCard}>
       <Card.Body>
         <Card.Title>{title}</Card.Title>
         <Card.Text>
           {body}
+        </Card.Text>
+      </Card.Body>
+    </Card>
+  );
+}
+
+function renderComments() {
+  return (
+    <Card style={styles.PostCard}>
+      <Card.Body>
+        <Card.Title>todo</Card.Title>
+        <Card.Text>
+          comment content todo
         </Card.Text>
       </Card.Body>
     </Card>
@@ -68,12 +81,13 @@ class Post extends Component {
             crossorigin="anonymous"
         />
         <MainNavBar></MainNavBar>
-        <Card>
-          <ApolloHooksProvider client={client}>
+        <ApolloHooksProvider client={client}>
+          <div>
             <PostCard postId={this.props.id}></PostCard>
-          </ApolloHooksProvider>
-          {this.props.id}
-        </Card>
+            <CommentCard></CommentCard>
+          </div>
+          
+        </ApolloHooksProvider>
       </ApolloProvider>
     )
   }
