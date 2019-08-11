@@ -9,58 +9,35 @@ const crypto = require("crypto");
 const posts = [
   {
     id: '1',
+    type: 'text',
     title: 'Welcome to my reddit clone!',
     body: 'insert body here'
   },
   {
     id: '2',
+    type: 'link',
     title: 'Google search takes 7 seconds on certain queries',
     url: 'https://twitter.com/liron/status/1157327854033674241'
   },
   {
     id: '3',
+    type: 'text',
     title: '~Another text post~',
     body: 'another body'
   },
   {
     id: '4',
+    type: 'link',
     title: 'Bill Gates Resume (1974)',
     url: 'https://image.cnbcfm.com/api/v1/image/104645467-BillGatesearlyresume.jpg?v=1529475934'
   },
   {
     id: '5',
+    type: 'link',
     title: 'Why Developers Hate Coding Skills Tests and What Hiring Managers Can Do',
     url: 'https://hackernoon.com/why-developers-hate-coding-skills-8m6u3za1'
   }
 ];
-
-// const posts = [
-//   {
-//     id: '1',
-//     title: 'Welcome to my reddit clone!',
-//     body: 'insert body here'
-//   },
-//   {
-//     id: '2',
-//     title: 'Google search takes 7 seconds on certain queries',
-//     url: 'https://twitter.com/liron/status/1157327854033674241'
-//   },
-//   {
-//     id: '3',
-//     title: '~Another text post~',
-//     body: 'another body'
-//   },
-//   {
-//     id: '4',
-//     title: 'Bill Gates Resume (1974)',
-//     url: 'https://image.cnbcfm.com/api/v1/image/104645467-BillGatesearlyresume.jpg?v=1529475934'
-//   },
-//   {
-//     id: '5',
-//     title: 'Why Developers Hate Coding Skills Tests and What Hiring Managers Can Do',
-//     url: 'https://hackernoon.com/why-developers-hate-coding-skills-8m6u3za1'
-//   }
-// ];
 
 // Type definitions define the "shape" of your data and specify
 // which ways the data can be fetched from the GraphQL server.
