@@ -9,7 +9,9 @@ class MainNavBar extends Component {
 	render() {
 		return (
 			<Navbar bg="light" expand="lg">
-				<Navbar.Brand>Go's Reddit</Navbar.Brand>
+				<Navbar.Brand href={"/"}>
+		  			Go's Reddit
+				</Navbar.Brand>
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse id="basic-navbar-nav">
 					<Form inline>
