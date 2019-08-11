@@ -1,64 +1,93 @@
-import React, {Component} from "react";
+import React, {Component, useState} from "react";
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Nav from 'react-bootstrap/Nav'
 import gql from "graphql-tag";
 import styles from "./style";
+import { useMutation } from '@apollo/react-hooks';
+import { ApolloProvider as ApolloHooksProvider } from '@apollo/react-hooks' // https://github.com/apollographql/apollo-client/issues/2042#issuecomment-509041949
+import ApolloClient from "apollo-boost";
+import { ApolloProvider, Query } from "react-apollo";
 
 const CREATE_POST = gql`
-  query createPost ($title: String!, $body: String, $url: String){
-    createPost (title: $title, body: $body, url: $url) {
+  mutation createPost ($type: String!, $title: String!, $body: String, $url: String){
+    createPost (type: $type, title: $title, body: $body, url: $url) {
       id
       title
       body
+      url
     }
   }
 `;
+
+const client = new ApolloClient({
+  uri: "http://localhost:4000/"
+});
 
 const initialState = {
   type: 'text'
 };
 
+function CreatePostFormWithHook(createPostFormState) {
+
+  var titleInput = React.createRef(); 
+  var bodyInput = React.createRef(); 
+  var urlInput = React.createRef(); 
+
+  const [createPost, { data }] = useMutation(CREATE_POST);
+
+  if (createPostFormState.formType == 'text') {
+    return (
+      <Form style={styles.FormPadding} onSubmit={
+        e => {
+          e.preventDefault();
+          var title = (titleInput.current == null ? '' : titleInput.current.value);
+          var body = (bodyInput.current == null ? '' : bodyInput.current.value);
+          createPost({ variables: { type: 'text', title: title, body: body  } });
+          //todo - get id and go to site/post?id
+        }
+      }>
+        <Form.Group controlId="formTitle">
+            <Form.Control ref={titleInput} type="text" placeholder="Enter Title"/>
+        </Form.Group>
+        <Form.Group controlId="formBody"> 
+            <Form.Control ref={bodyInput} as="textarea" rows="4" placeholder="Text (Optional)"/>
+        </Form.Group>
+        <Button variant="primary" type="submit">
+            Submit
+        </Button>
+      </Form>
+    )
+  } else if (createPostFormState.formType == 'link') {
+    return (
+      <Form style={styles.FormPadding} onSubmit={
+        e => {
+          e.preventDefault();
+          var title = (titleInput.current == null ? '' : titleInput.current.value);
+          var url = (urlInput.current == null ? '' : urlInput.current.value);
+          createPost({ variables: { type: 'link', title: title, url: url  } });
+          //todo - get id and go to site/post?id
+        }
+      }>
+        <Form.Group controlId="formTitle">
+            <Form.Control ref={titleInput} type="text" placeholder="Enter Title" />
+        </Form.Group>
+        <Form.Group controlId="formBody">
+            <Form.Control ref={urlInput} type="text" placeholder="Enter URL" />
+        </Form.Group>
+        <Button variant="primary" type="submit">
+            Submit
+        </Button>
+      </Form>
+    )
+  }
+}
+
 class CreatePostForm extends Component {
   constructor(props) {
     super(props);
     this.state = initialState;
-
-    this.titleInput = React.createRef(); 
-    this.bodyInput = React.createRef(); 
-    this.urlInput = React.createRef(); 
-
     this.updateFormType = this.updateFormType.bind(this);
-    this.renderForm = this.renderForm.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  createPostMutation(title, body, url) {
-    const { loading, error, data } = useQuery(CREATE_POST, {
-      variables: {title, body, url},
-    });
-  }
-
-  handleSubmit() {
-    console.log(this.state);
-
-    // call create post mutation
-  }
-
-  handleChange(event) {
-    this.setState(state => ({
-      title: (this.titleInput.current == null ? '' : this.titleInput.current.value),
-      body: (this.bodyInput.current == null ? '' : this.bodyInput.current.value),
-      url: (this.urlInput.current == null ? '' : this.urlInput.current.value)
-    }));
-  }
-
-  /**
-   * After switching forms, the state will be wiped. 
-   */
-  clearState() {
-    this.setState(initialState);
   }
 
   updateFormType(type){
@@ -77,38 +106,6 @@ class CreatePostForm extends Component {
     }
   }
 
-  renderForm() {
-    if (this.state.type == 'text') {
-      return (
-        <Form style={styles.FormPadding}>
-            <Form.Group controlId="formTitle">
-                <Form.Control ref={this.titleInput} type="text" placeholder="Enter Title" onChange={this.handleChange}/>
-            </Form.Group>
-            <Form.Group controlId="formBody"> 
-                <Form.Control ref={this.bodyInput} as="textarea" rows="4" placeholder="Text (Optional)" onChange={this.handleChange}/>
-            </Form.Group>
-            <Button variant="primary" onClick={this.handleSubmit}>
-                Submit
-            </Button>
-          </Form>
-      )
-    } else if (this.state.type == 'link') {
-      return (
-        <Form style={styles.FormPadding}>
-          <Form.Group controlId="formTitle">
-              <Form.Control ref={this.titleInput} type="text" placeholder="Enter Title" onChange={this.handleChange} />
-          </Form.Group>
-          <Form.Group controlId="formBody">
-              <Form.Control ref={this.urlInput} type="text" placeholder="Enter URL" onChange={this.handleChange}/>
-          </Form.Group>
-          <Button variant="primary" onClick={this.handleSubmit}>
-              Submit
-          </Button>
-        </Form>
-      )
-    }
-  }
-
   render() {
       return (
           <div>
@@ -122,7 +119,11 @@ class CreatePostForm extends Component {
                   </Nav.Item>
                 </Nav>
               </div>
-              {this.renderForm()}
+              <ApolloProvider client={client}>
+                <ApolloHooksProvider client={client}>
+                  <CreatePostFormWithHook formType={this.state.type}></CreatePostFormWithHook>
+                </ApolloHooksProvider>
+              </ApolloProvider>
           </div>
       )
   }

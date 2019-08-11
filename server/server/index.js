@@ -1,9 +1,11 @@
 const { ApolloServer, gql } = require('apollo-server');
 const { find, filter } = require('lodash');
+const crypto = require("crypto");
 
 // This is a (sample) collection of books we'll be able to query
 // the GraphQL server for.  A more complete example might fetch
 // from an existing data source like a REST API or database.
+
 const posts = [
   {
     id: '1',
@@ -32,6 +34,34 @@ const posts = [
   }
 ];
 
+// const posts = [
+//   {
+//     id: '1',
+//     title: 'Welcome to my reddit clone!',
+//     body: 'insert body here'
+//   },
+//   {
+//     id: '2',
+//     title: 'Google search takes 7 seconds on certain queries',
+//     url: 'https://twitter.com/liron/status/1157327854033674241'
+//   },
+//   {
+//     id: '3',
+//     title: '~Another text post~',
+//     body: 'another body'
+//   },
+//   {
+//     id: '4',
+//     title: 'Bill Gates Resume (1974)',
+//     url: 'https://image.cnbcfm.com/api/v1/image/104645467-BillGatesearlyresume.jpg?v=1529475934'
+//   },
+//   {
+//     id: '5',
+//     title: 'Why Developers Hate Coding Skills Tests and What Hiring Managers Can Do',
+//     url: 'https://hackernoon.com/why-developers-hate-coding-skills-8m6u3za1'
+//   }
+// ];
+
 // Type definitions define the "shape" of your data and specify
 // which ways the data can be fetched from the GraphQL server.
 const typeDefs = gql`
@@ -40,9 +70,14 @@ const typeDefs = gql`
     getFrontPage: [Post]
     getPost(id: String!): Post
   }
+
+  type Mutation {
+    createPost(type: String!, title: String!, body: String, url: String): Post
+  }
   
   type Post {
-    id: String
+    type: String!
+    id: String!
     title: String
     url: String
     body: String
@@ -61,6 +96,34 @@ const resolvers = {
     getFrontPage: () => posts,
     getPost(obj, args, context, info) {
       return find(posts, { id: args.id });
+    }
+  },
+  Mutation: {
+    createPost(obj, args, context, info) {
+      console.log('yay');
+
+      var newPost = {};
+      
+      newPost.id = crypto.randomBytes(16).toString("hex");
+      newPost.title = args.title;
+
+      if (args.type == "text") {
+        console.log('hi');
+        console.log(args.body);
+        if (args.body != null) {
+          console.log('hi again!');
+          newPost.body = args.body;
+        }
+      } else if (args.type == "link") {
+        if (args.url != null) {
+          newPost.url = args.url;
+        }
+      }
+
+      console.log(newPost);
+      
+      posts.push(newPost);
+      return;
     }
   }
 };
