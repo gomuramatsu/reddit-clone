@@ -64,7 +64,8 @@ function CreatePostFormWithHook(createPostFormState) {
         e => {
           e.preventDefault();
           var title = (titleInput.current == null ? '' : titleInput.current.value);
-          var url = (urlInput.current == null ? '' : urlInput.current.value);
+          var url = (urlInput.current == null ? '' : encodeURI(urlInput.current.value));
+          console.log(url);
           createPost({ variables: { type: 'link', title: title, url: url  } });
           //todo - get id and go to site/post?id
         }

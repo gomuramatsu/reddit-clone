@@ -77,18 +77,14 @@ const resolvers = {
   },
   Mutation: {
     createPost(obj, args, context, info) {
-      console.log('yay');
-
       var newPost = {};
       
       newPost.id = crypto.randomBytes(16).toString("hex");
       newPost.title = args.title;
+      newPost.type = args.type; 
 
       if (args.type == "text") {
-        console.log('hi');
-        console.log(args.body);
         if (args.body != null) {
-          console.log('hi again!');
           newPost.body = args.body;
         }
       } else if (args.type == "link") {
@@ -97,6 +93,7 @@ const resolvers = {
         }
       }
 
+      console.log('new post added!');
       console.log(newPost);
       
       posts.push(newPost);

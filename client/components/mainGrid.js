@@ -22,14 +22,20 @@ const MainGridPost = () => (
       if (loading) return <p>Loading...</p>;
       if (error) return <p>Error :(</p>;
 
+        console.log(data);
+
       return data.getFrontPage.map(({ id, type, title, url }) => (
         <tr>
           <td  style={styles.MainGridTh}>
-            <Link href={
-              type == 'text' ? { pathname: '/post', query: { id: id }} : {pathname: url}
-            }>
-              <a style={styles.MainGridTitle}>{title}</a>
-            </Link>
+            {
+              type == 'text' ?
+                <Link href={{
+                  pathname: '/post', query: { id: id }}
+                } >
+                  <a style={styles.MainGridTitle}>{title}</a>
+                </Link> :
+                <a href={url} style={styles.MainGridTitle}>{title}</a>
+            }
             <Link href={{ pathname: '/post', query: { id: id }}}>
               <div style={styles.MainGridDetails}>small details and link to comments</div>
             </Link>
