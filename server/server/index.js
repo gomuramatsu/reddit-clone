@@ -93,11 +93,11 @@ const resolvers = {
         }
       }
 
-      console.log('new post added!');
+      console.log('new post added')
       console.log(newPost);
       
       posts.push(newPost);
-      return;
+      return newPost;
     }
   }
 };

@@ -8,6 +8,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { ApolloProvider as ApolloHooksProvider } from '@apollo/react-hooks' // https://github.com/apollographql/apollo-client/issues/2042#issuecomment-509041949
 import ApolloClient from "apollo-boost";
 import { ApolloProvider, Query } from "react-apollo";
+import Router from 'next/router'
 
 const CREATE_POST = gql`
   mutation createPost ($type: String!, $title: String!, $body: String, $url: String){
@@ -34,7 +35,14 @@ function CreatePostFormWithHook(createPostFormState) {
   var bodyInput = React.createRef(); 
   var urlInput = React.createRef(); 
 
-  const [createPost, { data }] = useMutation(CREATE_POST);
+  const [createPost, { data }] = useMutation(CREATE_POST, {
+    onCompleted: (returnData) => {
+      Router.push({
+        pathname: '/post',
+        query: { id: returnData.createPost.id },
+      });
+    }
+  });
 
   if (createPostFormState.formType == 'text') {
     return (
@@ -44,7 +52,6 @@ function CreatePostFormWithHook(createPostFormState) {
           var title = (titleInput.current == null ? '' : titleInput.current.value);
           var body = (bodyInput.current == null ? '' : bodyInput.current.value);
           createPost({ variables: { type: 'text', title: title, body: body  } });
-          //todo - get id and go to site/post?id
         }
       }>
         <Form.Group controlId="formTitle">
