@@ -4,6 +4,7 @@ import { ApolloProvider, Query } from "react-apollo";
 import gql from "graphql-tag";
 import Link from 'next/link';
 import styles from "./style";
+import Score from '../components/score';
 
 const MainGridPost = () => (
   <Query
@@ -12,6 +13,7 @@ const MainGridPost = () => (
         getFrontPage {
           id
           type
+          score
           title
           url
         }
@@ -24,21 +26,26 @@ const MainGridPost = () => (
 
         console.log(data);
 
-      return data.getFrontPage.map(({ id, type, title, url }) => (
+      return data.getFrontPage.map(({ id, type, score, title, url }) => (
         <tr>
           <td  style={styles.MainGridTh}>
-            {
-              type == 'text' ?
-                <Link href={{
-                  pathname: '/post', query: { id: id }}
-                } >
-                  <a style={styles.MainGridTitle}>{title}</a>
-                </Link> :
-                <a href={url} style={styles.MainGridTitle}>{title}</a>
-            }
-            <Link href={{ pathname: '/post', query: { id: id }}}>
-              <div style={styles.MainGridDetails}>small details and link to comments</div>
-            </Link>
+            <div style={styles.MainGridRowContainer}>
+              <Score score={score}></Score>
+              <div style={styles.MainGridTextContainer}>
+                {
+                  type == 'text' ?
+                    <Link href={{
+                      pathname: '/post', query: { id: id }}
+                    } >
+                      <a style={styles.MainGridTitle}>{title}</a>
+                    </Link> :
+                    <a href={url} style={styles.MainGridTitle}>{title}</a>
+                }
+                <Link href={{ pathname: '/post', query: { id: id }}}>
+                  <div style={styles.MainGridDetails}>small details and link to comments</div>
+                </Link>
+              </div>
+            </div>
           </td>
         </tr>
       ));

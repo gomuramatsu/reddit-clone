@@ -43,6 +43,10 @@ const MainGridTh = {
   "width": "100%"
 }
 
+const MainGridRowContainer = {
+  "display": "flex"
+}
+
 /**
  * POST PAGE
  */
@@ -54,6 +58,24 @@ const PostCard = {
   "width": "90% !important"
 };
 
+const VoteContainer = {
+  "display": "flex", /* or inline-flex */
+  "flex-direction": "column",
+  "align-items": "center",
+  "justify-content": "center"
+};
+
+const MainGridTextContainer = {
+  "display": "flex", /* or inline-flex */
+  "flex-direction": "column",
+  "align-items": "stretch",
+  "justify-content": "center",
+  "align-content": "start"
+};
+
+const UpvoteButton = {
+
+};
 
 const styles = {
   CreatePostNavStyle: CreatePostNavStyle,
@@ -61,8 +83,11 @@ const styles = {
   MainGridTitle: MainGridTitle,
   MainGridDetails: MainGridDetails,
   MainGridTh: MainGridTh,
+  MainGridRowContainer: MainGridRowContainer,
   FormPadding: FormPadding,
-  PostCard: PostCard
+  PostCard: PostCard,
+  VoteContainer: VoteContainer,
+  MainGridTextContainer: MainGridTextContainer
 };
 
 export default styles; 
