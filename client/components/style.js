@@ -70,7 +70,8 @@ const MainGridTextContainer = {
   "flex-direction": "column",
   "align-items": "stretch",
   "justify-content": "center",
-  "align-content": "start"
+  "align-content": "start",
+  "margin-left": "7px"
 };
 
 const UpvoteButton = {
