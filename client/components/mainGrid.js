@@ -30,7 +30,7 @@ const MainGridPost = () => (
         <tr>
           <td  style={styles.MainGridTh}>
             <div style={styles.MainGridRowContainer}>
-              <Score score={score}></Score>
+              <Score score={score} id={id}></Score>
               <div style={styles.MainGridTextContainer}>
                 {
                   type == 'text' ?

@@ -1,24 +1,42 @@
 import React, {Component} from "react";
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
-import Button from 'react-bootstrap/Button';
 import styles from "./style";
-// import upvote from './assets/up.png';
-// import downvote from './assets/down.png';
+import { withApollo } from 'react-apollo';
+import gql from "graphql-tag";
+
+const ADD_VOTE = gql`
+  mutation addVote ($id: String!, $vote: Int!){
+    addVote (id: $id, vote: $vote) {
+      id
+      score
+    }
+  }
+`;
 
 class Score extends Component {
+	constructor(props){
+		super(props);
+		this.mutate = props.client.mutate;
+		this.onClickVoteArrow = this.onClickVoteArrow.bind(this);
+	}
+
+	onClickVoteArrow = (vote) => {
+		var id = this.props.id;
+		this.mutate({
+			mutation: ADD_VOTE,
+			variables: { id, vote }
+		}).then((voteReturnPost) => console.log(voteReturnPost.data));
+	}
+
 	render() {
 		return (
 			<div style={styles.VoteContainer}>
-                <img src={require('./assets/up.png')}  />
+                <img onClick={() => this.onClickVoteArrow(1)} src={require('./assets/up.png')}  />
 				
                 <div>{this.props.score}</div>
-				<img src={require('./assets/down.png')}  />
+				<img onClick={() => this.onClickVoteArrow(-1)} src={require('./assets/down.png')}  />
             </div>
 		)
 	}
 }
 
-export default Score; 
+export default withApollo(Score); 

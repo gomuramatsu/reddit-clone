@@ -55,6 +55,7 @@ const typeDefs = gql`
 
   type Mutation {
     createPost(type: String!, title: String!, body: String, url: String): Post
+    addVote(id: String!, vote: Int!): Post
   }
   
   type Post {
@@ -105,6 +106,11 @@ const resolvers = {
       
       posts.push(newPost);
       return newPost;
+    },
+    addVote(obj, args, context, info) {
+      var post = find(posts, { id: args.id });
+      post.score += args.vote;
+      return post;
     }
   }
 };
