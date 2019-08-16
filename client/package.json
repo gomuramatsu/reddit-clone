@@ -12,12 +12,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@apollo/react-hoc": "^3.0.0",
     "@apollo/react-hooks": "^3.0.0",
     "apollo-boost": "^0.4.3",
     "bootstrap": "^4.3.1",
     "graphql": "^14.4.2",
     "lodash": "^4.17.15",
     "next": "^9.0.3",
+    "next-images": "^1.1.2",
     "node-fetch": "^2.6.0",
     "react": "^16.8.6",
     "react-apollo": "^2.5.8",
@@ -27,6 +29,7 @@
   },
   "devDependencies": {
     "css-loader": "^3.1.0",
+    "webpack": "^4.39.2",
     "webpack-cli": "^3.3.6"
   }
 }

@@ -10,30 +10,35 @@ const posts = [
   {
     id: '1',
     type: 'text',
+    score: 8,
     title: 'Welcome to my reddit clone!',
     body: 'insert body here'
   },
   {
     id: '2',
     type: 'link',
+    score: 7,
     title: 'Google search takes 7 seconds on certain queries',
     url: 'https://twitter.com/liron/status/1157327854033674241'
   },
   {
     id: '3',
     type: 'text',
+    score: 3,
     title: '~Another text post~',
     body: 'another body'
   },
   {
     id: '4',
     type: 'link',
+    score: 25,
     title: 'Bill Gates Resume (1974)',
     url: 'https://image.cnbcfm.com/api/v1/image/104645467-BillGatesearlyresume.jpg?v=1529475934'
   },
   {
     id: '5',
     type: 'link',
+    score: 5,
     title: 'Why Developers Hate Coding Skills Tests and What Hiring Managers Can Do',
     url: 'https://hackernoon.com/why-developers-hate-coding-skills-8m6u3za1'
   }
@@ -50,11 +55,13 @@ const typeDefs = gql`
 
   type Mutation {
     createPost(type: String!, title: String!, body: String, url: String): Post
+    addVote(id: String!, vote: Int!): Post
   }
   
   type Post {
     type: String!
     id: String!
+    score: Int!
     title: String
     url: String
     body: String
@@ -82,6 +89,7 @@ const resolvers = {
       newPost.id = crypto.randomBytes(16).toString("hex");
       newPost.title = args.title;
       newPost.type = args.type; 
+      newPost.score = 0; 
 
       if (args.type == "text") {
         if (args.body != null) {
@@ -98,6 +106,11 @@ const resolvers = {
       
       posts.push(newPost);
       return newPost;
+    },
+    addVote(obj, args, context, info) {
+      var post = find(posts, { id: args.id });
+      post.score += args.vote;
+      return post;
     }
   }
 };
