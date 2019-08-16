@@ -74,6 +74,12 @@ const MainGridTextContainer = {
   "margin-left": "7px"
 };
 
+const PostTextContainer = {
+  "display": "flex", /* or inline-flex */
+  "flex-direction": "column",
+  "margin-left": "7px"
+};
+
 const UpvoteButton = {
 
 };
@@ -88,7 +94,8 @@ const styles = {
   FormPadding: FormPadding,
   PostCard: PostCard,
   VoteContainer: VoteContainer,
-  MainGridTextContainer: MainGridTextContainer
+  MainGridTextContainer: MainGridTextContainer,
+  PostTextContainer: PostTextContainer
 };
 
 export default styles; 
