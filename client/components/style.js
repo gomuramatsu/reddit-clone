@@ -17,7 +17,25 @@ const FormPadding = {
   "padding-bottom": "1%",
   "padding-left": "4%",
   "padding-right": "4%"
-}
+};
+
+/**
+ * LOGIN PAGE
+ */
+const LoginFormPadding = {
+  "margin-top": "8%",
+  "margin-bottom": "2%",
+  "margin-left": "30%",
+  "margin-right": "30%",
+  "padding-top": "1%",
+  "padding-bottom": "1%",
+  "padding-left": "4%",
+  "padding-right": "4%"
+};
+
+const LoginFormButton = {
+  "width": "100%"
+};
 
 /**
  * FRONT PAGE
@@ -92,6 +110,8 @@ const styles = {
   MainGridTh: MainGridTh,
   MainGridRowContainer: MainGridRowContainer,
   FormPadding: FormPadding,
+  LoginFormPadding: LoginFormPadding,
+  LoginFormButton: LoginFormButton,
   PostCard: PostCard,
   VoteContainer: VoteContainer,
   MainGridTextContainer: MainGridTextContainer,
