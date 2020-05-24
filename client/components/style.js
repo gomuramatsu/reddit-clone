@@ -37,6 +37,10 @@ const LoginFormButton = {
   "width": "100%"
 };
 
+const LogInFormTitle = {
+  "padding-bottom": "8px"
+};
+
 /**
  * FRONT PAGE
  */
@@ -112,6 +116,7 @@ const styles = {
   FormPadding: FormPadding,
   LoginFormPadding: LoginFormPadding,
   LoginFormButton: LoginFormButton,
+  LogInFormTitle: LogInFormTitle, 
   PostCard: PostCard,
   VoteContainer: VoteContainer,
   MainGridTextContainer: MainGridTextContainer,

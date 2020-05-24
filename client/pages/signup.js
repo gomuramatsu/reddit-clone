@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import MainNavBar from '../components/nav';
-import LoginScreenContent from '../components/loginScreenContent';
+import SignUpScreenContent from '../components/signupScreenContent';
 
-class LoginPage extends Component {
+class SignUpPage extends Component {
     render() {
         return (
             <div>
@@ -19,10 +19,10 @@ class LoginPage extends Component {
                     crossorigin="anonymous"
                 />
                 <MainNavBar></MainNavBar>
-                <LoginScreenContent></LoginScreenContent>
+                <SignUpScreenContent></SignUpScreenContent>
             </div>
         )
     }
 }
 
-export default LoginPage; 
+export default SignUpPage; 
