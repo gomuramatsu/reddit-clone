@@ -15,11 +15,9 @@ class SignUpScreenContent extends Component {
         
         // Initialize Firebase
         console.log(firebaseConfig);
-        // firebase.initializeApp(firebaseConfig);
-        // firebase.analytics();
         if (!firebase.apps.length) {
             firebase.initializeApp(firebaseConfig);
-         }
+        }
 
         return (
             <Form style={styles.LoginFormPadding} onSubmit={
@@ -40,7 +38,19 @@ class SignUpScreenContent extends Component {
                     console.log(auth);
 
                     const promise = auth.createUserWithEmailAndPassword(user, pass);
+
+                    // todo - display error
                     promise.catch(e => console.log(e.message));
+
+                    firebase.auth().onAuthStateChanged(firebaseUser => {
+                        if (firebaseUser){
+                            console.log(firebaseUser.uid);
+                            console.log(firebaseUser);
+                            Router.push('/');
+                        } else {
+                            console.log('login failed');
+                        }
+                    })
                   }
                 }
               }>
