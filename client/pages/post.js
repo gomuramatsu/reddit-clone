@@ -8,6 +8,8 @@ import gql from "graphql-tag";
 import { ApolloProvider as ApolloHooksProvider } from '@apollo/react-hooks' // https://github.com/apollographql/apollo-client/issues/2042#issuecomment-509041949
 import styles from "../components/style";
 import Score from '../components/score';
+import { Store } from '../components/util/store';
+import { Provider } from 'react-redux';
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/"
@@ -83,14 +85,15 @@ class Post extends Component {
             integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             crossorigin="anonymous"
         />
-        <MainNavBar></MainNavBar>
-        <ApolloHooksProvider client={client}>
-          <div>
-            <PostCard postId={this.props.id}></PostCard>
-            <CommentCard></CommentCard>
-          </div>
-          
-        </ApolloHooksProvider>
+        <Provider store={Store} >
+          <MainNavBar></MainNavBar>
+          <ApolloHooksProvider client={client}>
+            <div>
+              <PostCard postId={this.props.id}></PostCard>
+              <CommentCard></CommentCard>
+            </div>
+          </ApolloHooksProvider>
+        </Provider>
       </ApolloProvider>
     )
   }
