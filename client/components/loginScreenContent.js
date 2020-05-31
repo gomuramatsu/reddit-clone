@@ -6,8 +6,8 @@ import firebase from 'firebase';
 import firebaseConfig from './config/firebaseConfig';
 import Router from 'next/router';
 import { connect } from 'react-redux';
-import { userConsts } from '../components/util/constants/userConstants';
 import UserAction from '../components/util/actions/userActions';
+import { saveState } from '../components/util/localStorage';
 
 function LoginScreenContent (props) {
     var userInput = React.createRef(); 

@@ -8,8 +8,12 @@ import gql from "graphql-tag";
 import { ApolloProvider as ApolloHooksProvider } from '@apollo/react-hooks' // https://github.com/apollographql/apollo-client/issues/2042#issuecomment-509041949
 import styles from "../components/style";
 import Score from '../components/score';
-import { Store } from '../components/util/store';
+import CommentCard from '../components/commentSection';
+import { useRouter } from 'next/router';
+
+import { saveState } from '../components/util/localStorage';
 import { Provider } from 'react-redux';
+import { Store } from '../components/util/store';
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/"
@@ -26,9 +30,13 @@ const GET_POST = gql`
   }
 `;
 
-function PostCard ({postId}){
+function PostCard (props){
+
+  console.log('gonna get postcard!!');
+  console.log(props);
+
   const { loading, error, data } = useQuery(GET_POST, {
-    variables: {postId},
+    variables: {postId: props.postId}
   });
 
   if (loading) return <p>Loading...</p>;
@@ -38,10 +46,6 @@ function PostCard ({postId}){
   console.log(data.getPost.title);
 
   return renderPost(data.getPost.id, data.getPost.score, data.getPost.title, data.getPost.body);
-};
-
-function CommentCard (){
-  return renderComments();
 };
 
 function renderPost(id, score, title, body) {
@@ -58,45 +62,34 @@ function renderPost(id, score, title, body) {
   );
 }
 
-function renderComments() {
+function Post() {
+  Store.subscribe(() => {
+      console.log('state changed!!');
+      saveState(Store.getState());
+  })
+
+  const router = useRouter();
+  console.log(router.query.id);
+
   return (
-    <Card style={styles.PostCard}>
-      <Card.Body>
-        <Card.Title>todo</Card.Title>
-        <Card.Text>
-          comment content todo
-        </Card.Text>
-      </Card.Body>
-    </Card>
+    <ApolloProvider client={client}>
+      <link
+          rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous"
+      />
+      <Provider store={Store} >
+        <MainNavBar></MainNavBar>
+        <ApolloHooksProvider client={client}>
+          <div>
+            <PostCard postId={router.query.id}></PostCard>
+            <CommentCard postId={router.query.id}></CommentCard>
+          </div>
+        </ApolloHooksProvider>
+      </Provider>
+    </ApolloProvider>
   );
-}
-
-class Post extends Component {
-  static getInitialProps ({ query: { id } }) {
-    return { id }
-  }
-
-  render() {
-    return (
-      <ApolloProvider client={client}>
-        <link
-            rel="stylesheet"
-            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-            crossorigin="anonymous"
-        />
-        <Provider store={Store} >
-          <MainNavBar></MainNavBar>
-          <ApolloHooksProvider client={client}>
-            <div>
-              <PostCard postId={this.props.id}></PostCard>
-              <CommentCard></CommentCard>
-            </div>
-          </ApolloHooksProvider>
-        </Provider>
-      </ApolloProvider>
-    )
-  }
 }
 
 export default Post;

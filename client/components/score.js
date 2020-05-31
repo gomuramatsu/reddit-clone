@@ -12,8 +12,18 @@ const ADD_VOTE = gql`
   }
 `;
 
+const ADD_COMMENT_VOTE = gql`
+  mutation addCommentVote ($id: String!, $vote: Int!){
+    addCommentVote (id: $id, vote: $vote) {
+      id
+      score
+    }
+  }
+`;
+
 class Score extends Component {
 	constructor(props){
+		console.log(props);
 		super(props);
 		this.mutate = props.client.mutate;
 		this.onClickVoteArrow = this.onClickVoteArrow.bind(this);
@@ -21,10 +31,17 @@ class Score extends Component {
 
 	onClickVoteArrow = (vote) => {
 		var id = this.props.id;
-		this.mutate({
-			mutation: ADD_VOTE,
-			variables: { id, vote }
-		}).then((voteReturnPost) => console.log(voteReturnPost.data));
+		if (this.props.type == "comment"){
+			this.mutate({
+				mutation: ADD_COMMENT_VOTE,
+				variables: { id, vote }
+			}).then((voteReturnPost) => console.log(voteReturnPost.data));
+		} else {
+			this.mutate({
+				mutation: ADD_VOTE,
+				variables: { id, vote }
+			}).then((voteReturnPost) => console.log(voteReturnPost.data));
+		}
 	}
 
 	render() {

@@ -1,10 +1,16 @@
 import React, {Component} from "react";
 import MainNavBar from '../components/nav';
 import LoginScreenContent from '../components/loginScreenContent';
-import { Store } from '../components/util/store';
+import { saveState } from '../components/util/localStorage';
 import { Provider } from 'react-redux';
+import { Store } from '../components/util/store';
 
 function LoginPage() {
+    Store.subscribe(() => {
+        console.log('state changed!!');
+        saveState(Store.getState());
+    })
+
     return (
         <div>
             {/* <!-- The core Firebase JS SDK is always required and must be listed first --> */}

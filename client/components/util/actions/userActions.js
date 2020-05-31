@@ -9,4 +9,10 @@ export default class UserAction {
         }
     }
 
+    static logout() {
+        return {
+            type: userConsts.LOGOUT
+        }
+    }
+
 }
