@@ -24,16 +24,6 @@ function renderComments(comments) {
   console.log(comments);
   var commentDivs = [];
   for (var i = 0; i < comments.length; i++){
-    // commentDivs.push(
-    //   <Card style={styles.PostCard}>
-    //     <Card.Body style={styles.MainGridRowContainer}>
-    //       <Score type='comment' score={comments[i].score} id={comments[i].id}></Score>
-    //       <Card.Text>
-    //         {comments[i].comment}
-    //       </Card.Text>
-    //     </Card.Body>
-    //   </Card>
-    // )
     commentDivs.push(
     <tr>
       <td  style={styles.MainGridTh}>

@@ -9,6 +9,7 @@ import { ApolloProvider as ApolloHooksProvider } from '@apollo/react-hooks' // h
 import styles from "../components/style";
 import Score from '../components/score';
 import CommentCard from '../components/commentSection';
+import NewCommentSection from '../components/newCommentSection';
 import { useRouter } from 'next/router';
 
 import { saveState } from '../components/util/localStorage';
@@ -86,6 +87,7 @@ function Post() {
           <div>
             <PostCard postId={router.query.id}></PostCard>
             <CommentCard postId={router.query.id}></CommentCard>
+            <NewCommentSection postId={router.query.id}></NewCommentSection>
           </div>
         </ApolloHooksProvider>
       </Provider>
