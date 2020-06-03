@@ -73,7 +73,7 @@ const comments = [
     id: '2',
     postId: '1',
     username: 'user123',
-    comment: 'Hello this is a SECOND COMMEND',
+    comment: 'Hello this is another comment!',
     score: 2
   }
 ]
@@ -93,6 +93,7 @@ const typeDefs = gql`
 
   type Mutation {
     createPost(username: String!, type: String!, title: String!, body: String, url: String): Post
+    createComment(username: String!, postId: String!, comment: String!): Comment
     addVote(id: String!, vote: Int!): Post
     addCommentVote(id: String!, vote: Int!): Comment
     addUser(username: String!, firebaseUID: String!): User
@@ -209,6 +210,16 @@ const resolvers = {
       }
       users.push(newUserObject);
       return newUserObject; 
+    },
+    createComment(obj, args, context, info) {
+      var newComment = {};
+      newComment.id = crypto.randomBytes(16).toString("hex");
+      newComment.postId = args.postId; 
+      newComment.username = args.username;
+      newComment.comment = args.comment;
+      newComment.score = 0;
+      comments.push(newComment);
+      return newComment; 
     }
   }
 };
