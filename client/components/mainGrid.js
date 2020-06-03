@@ -12,21 +12,28 @@ const MainGridPost = () => (
       {
         getFrontPage {
           id
+          username
           type
           score
           title
           url
+          numberOfComments
         }
       }
     `}
   >
     {({ loading, error, data }) => {
       if (loading) return <p>Loading...</p>;
-      if (error) return <p>Error :(</p>;
+      // if (error) return <p>Error :(</p>;
+
+      if (error) {
+        console.log(error);
+        return <p>Error :(</p>;
+        }
 
         console.log(data);
 
-      return data.getFrontPage.map(({ id, type, score, title, url }) => (
+      return data.getFrontPage.map(({ id, username, type, score, title, url, numberOfComments }) => (
         <tr>
           <td  style={styles.MainGridTh}>
             <div style={styles.MainGridRowContainer}>
@@ -41,8 +48,9 @@ const MainGridPost = () => (
                     </Link> :
                     <a href={url} style={styles.MainGridTitle}>{title}</a>
                 }
+                <div>{username}</div>
                 <Link href={{ pathname: '/post', query: { id: id }}}>
-                  <div style={styles.MainGridDetails}>small details and link to comments</div>
+                  <div style={styles.MainGridDetails}>{numberOfComments} comments</div>
                 </Link>
               </div>
             </div>

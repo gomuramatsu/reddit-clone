@@ -2,10 +2,16 @@ import { userConsts }from '../constants/userConstants';
 
 export default class UserAction {
   
-    static login(firebaseUser) {
+    static login(userWrapper) {
         return {
             type: userConsts.LOGIN_SUCCESS, 
-            payload: firebaseUser
+            payload: userWrapper
+        }
+    }
+
+    static logout() {
+        return {
+            type: userConsts.LOGOUT
         }
     }
 

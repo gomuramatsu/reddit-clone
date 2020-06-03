@@ -2,17 +2,17 @@
  * CREATE POST PAGE
  */
 const CreatePostNavStyle = {
-  "margin-top": "2%",
+  "marginTop": "2%",
   "padding-top": "1%",
-  "margin-left": "25%",
-  "margin-right": "25%"
+  "marginLeft": "25%",
+  "marginRight": "25%"
 };
 
 const FormPadding = {
-  "margin-top": "2%",
-  "margin-bottom": "2%",
-  "margin-left": "8%",
-  "margin-right": "8%",
+  "marginTop": "2%",
+  "marginBottom": "2%",
+  "marginLeft": "8%",
+  "marginRight": "8%",
   "padding-top": "1%",
   "padding-bottom": "1%",
   "padding-left": "4%",
@@ -23,10 +23,10 @@ const FormPadding = {
  * LOGIN PAGE
  */
 const LoginFormPadding = {
-  "margin-top": "8%",
-  "margin-bottom": "2%",
-  "margin-left": "30%",
-  "margin-right": "30%",
+  "marginTop": "8%",
+  "marginBottom": "2%",
+  "marginLeft": "30%",
+  "marginRight": "30%",
   "padding-top": "1%",
   "padding-bottom": "1%",
   "padding-left": "4%",
@@ -46,15 +46,15 @@ const LogInFormTitle = {
  */
 
 const MainGrid = {
-  "margin-top": "2%",
-  "margin-bottom": "2%",
-  "margin-left": "5%",
-  "margin-right": "5%",
+  "marginTop": "2%",
+  "marginBottom": "2%",
+  "marginLeft": "5%",
+  "marginRight": "5%",
   "width": "90% !important"
 };
 
 const MainGridDetails = {
-  "font-size": "small"
+  "fontSize": "small"
 }
 
 const MainGridTitle = {
@@ -73,33 +73,33 @@ const MainGridRowContainer = {
  * POST PAGE
  */
 const PostCard = {
-  "margin-top": "2%",
-  "margin-bottom": "2%",
-  "margin-left": "5%",
-  "margin-right": "5%",
+  "marginTop": "2%",
+  "marginBottom": "2%",
+  "marginLeft": "5%",
+  "marginRight": "5%",
   "width": "90% !important"
 };
 
 const VoteContainer = {
   "display": "flex", /* or inline-flex */
-  "flex-direction": "column",
-  "align-items": "center",
-  "justify-content": "center"
+  "flexDirection": "column",
+  "alignItems": "center",
+  "justifyContent": "center"
 };
 
 const MainGridTextContainer = {
   "display": "flex", /* or inline-flex */
-  "flex-direction": "column",
-  "align-items": "stretch",
-  "justify-content": "center",
-  "align-content": "start",
-  "margin-left": "7px"
+  "flexDirection": "column",
+  "alignItems": "stretch",
+  "justifyContent": "center",
+  "alignContent": "start",
+  "marginLeft": "7px"
 };
 
 const PostTextContainer = {
   "display": "flex", /* or inline-flex */
-  "flex-direction": "column",
-  "margin-left": "7px"
+  "flexDirection": "column",
+  "marginLeft": "7px"
 };
 
 const UpvoteButton = {

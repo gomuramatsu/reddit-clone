@@ -5,12 +5,24 @@ import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import { connect } from 'react-redux';
+import firebase from 'firebase';
+import firebaseConfig from './config/firebaseConfig';
+import UserAction from '../components/util/actions/userActions';
 
 function MainNavBar (props) {
+	console.log('drawing navBAR');
+	console.log(props);
+
+	// Initialize Firebase
+    console.log(firebaseConfig);
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+    }
+
 	return (
 		<Navbar bg="light" expand="lg">
 			<Navbar.Brand href={"/"}>
-				Go's Reddit
+				Geddit
 			</Navbar.Brand>
 			<Navbar.Toggle aria-controls="basic-navbar-nav" />
 			<Navbar.Collapse id="basic-navbar-nav">
@@ -19,10 +31,24 @@ function MainNavBar (props) {
 					<Button variant="outline-primary">Search</Button>
 				</Form>
 				<Nav className="ml-auto">
-					<Nav.Link href="/createPost">Create Post</Nav.Link>
+					{ !props.loggedIn ? '' :<Nav.Link>Logged in as {props.username}</Nav.Link>}
+					{ !props.loggedIn ? '' :<Nav.Link href="/createPost">Create Post</Nav.Link>}
+					
+					{ !props.loggedIn ? '' :
+						<Nav.Link onClick={
+						e => {
+							console.log('log out CLICKED');
+							firebase.auth().signOut().then(function() {
+								// Sign-out successful.
+								console.log('sign out successful!');
+								props.dispatch(UserAction.logout());
+							}, function(error) {
+								console.log('sign out FAILED');
+							});
+						}}>Log Out</Nav.Link>
+					}
 					{ props.loggedIn ? '' :<Nav.Link href="/login">Log In</Nav.Link>}
 					{ props.loggedIn ? '' :<Nav.Link href="/signup">Sign up</Nav.Link>}
-					
 				</Nav>
 			</Navbar.Collapse>
 		</Navbar>
@@ -30,8 +56,9 @@ function MainNavBar (props) {
 }
 
 const mapStateToProps = function(state) {
+    console.log(state);
     return {
-        user: state.user,
+        username: state.username,
         loggedIn: state.loggedIn
     }
 }

@@ -1,12 +1,15 @@
 import React, {Component} from "react";
 import MainNavBar from '../components/nav';
 import MainGrid from '../components/mainGrid';
-import { useSelector } from 'react-redux';
-
+import { saveState } from '../components/util/localStorage';
+import { Provider } from 'react-redux';
+import { Store } from '../components/util/store';
 
 function Home () {
-    const loggedInUser = useSelector (state => state.user);
-    console.log(loggedInUser);
+    Store.subscribe(() => {
+        console.log('state changed!!');
+        saveState(Store.getState());
+    })
     
     return (
         <div>
@@ -23,8 +26,10 @@ function Home () {
                 integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                 crossorigin="anonymous"
             />
-            <MainNavBar></MainNavBar>
-            <MainGrid></MainGrid>
+            <Provider store={Store} >
+                <MainNavBar></MainNavBar>
+                <MainGrid></MainGrid>
+            </Provider>
         </div>
     )
 }
