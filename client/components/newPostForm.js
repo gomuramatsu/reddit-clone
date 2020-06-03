@@ -102,9 +102,8 @@ function CreatePostFormWithHook(props) {
 }
 
 const mapStateToProps = function(state) {
-  console.log(state);
   return {
-      user: state.user,
+      username: state.username,
       loggedIn: state.loggedIn
   }
 }

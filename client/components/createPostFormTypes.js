@@ -42,7 +42,7 @@ function CreatePostForm(props) {
 
 const mapStateToProps = function(state) {
   return {
-      user: state.user,
+      username: state.username,
       loggedIn: state.loggedIn
   }
 }

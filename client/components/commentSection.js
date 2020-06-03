@@ -12,7 +12,7 @@ const GET_COMMENTS = gql`
 query getComments ($postId: String!){
   getComments (postId: $postId) {
     id
-    userId
+    username
     postId
     score
     comment
@@ -43,7 +43,7 @@ function renderComments(comments) {
             {comments[i].comment}
           </div>
           <div>
-          {comments[i].userId}
+          {comments[i].username}
           </div>
         </div>
       </td>

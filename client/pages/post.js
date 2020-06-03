@@ -23,6 +23,7 @@ const GET_POST = gql`
   query getPost ($postId: String!){
     getPost (id: $postId) {
       id
+      username
       score
       title
       body
@@ -45,7 +46,7 @@ function PostCard (props){
   console.log({data});
   console.log(data.getPost.title);
 
-  return renderPost(data.getPost.id, data.getPost.score, data.getPost.title, data.getPost.body);
+  return renderPost(data.getPost.id, data.getPost.username, data.getPost.score, data.getPost.title, data.getPost.body);
 };
 
 function renderPost(id, score, title, body) {
