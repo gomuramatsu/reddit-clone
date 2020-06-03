@@ -31,7 +31,7 @@ function MainNavBar (props) {
 					<Button variant="outline-primary">Search</Button>
 				</Form>
 				<Nav className="ml-auto">
-					{ !props.loggedIn ? '' :<Nav.Link href="/login">Logged in as {props.username}</Nav.Link>}
+					{ !props.loggedIn ? '' :<Nav.Link>Logged in as {props.username}</Nav.Link>}
 					{ !props.loggedIn ? '' :<Nav.Link href="/createPost">Create Post</Nav.Link>}
 					
 					{ !props.loggedIn ? '' :

@@ -12,9 +12,9 @@ import Router from 'next/router';
 import { connect } from 'react-redux';
 
 const CREATE_POST = gql`
-  mutation createPost ($userId: String!, $type: String!, $title: String!, $body: String, $url: String){
-    createPost (userId: $userId, type: $type, title: $title, body: $body, url: $url) {
-      userId
+  mutation createPost ($username: String!, $type: String!, $title: String!, $body: String, $url: String){
+    createPost (username: $username, type: $type, title: $title, body: $body, url: $url) {
+      username
       id
       title
       body
@@ -33,6 +33,7 @@ function CreatePostFormWithHook(props) {
 
   const [createPost, { data }] = useMutation(CREATE_POST, {
     onCompleted: (returnData) => {
+      console.log(returnData);
       Router.push({
         pathname: '/post',
         query: { id: returnData.createPost.id },
@@ -46,18 +47,14 @@ function CreatePostFormWithHook(props) {
         e => {
           console.log('submitted text');
           console.log(props);
-          console.log(props.user);
-          console.log( props.user.uid);
-
 
           e.preventDefault();
           var title = (titleInput.current == null ? '' : titleInput.current.value);
           var body = (bodyInput.current == null ? '' : bodyInput.current.value);
           console.log('hi');
-          console.log(props.user.uid);
           console.log(title);
           console.log(body);
-          createPost({ variables: { userId: props.user.uid, type: 'text', title: title, body: body } });
+          createPost({ variables: { username: props.username, type: 'text', title: title, body: body } });
           console.log('hi2');
         }
       }>
@@ -78,13 +75,12 @@ function CreatePostFormWithHook(props) {
         e => {
           console.log('submitted LINK');
           console.log(props);
-          console.log(props.user);
 
           e.preventDefault();
           var title = (titleInput.current == null ? '' : titleInput.current.value);
           var url = (urlInput.current == null ? '' : encodeURI(urlInput.current.value));
           
-          createPost({ variables: { userId: props.user.uid, type: 'link', title: title, url: url  } });
+          createPost({ variables: { username: props.username, type: 'link', title: title, url: url  } });
         }
       }>
         <Form.Group controlId="formTitle">

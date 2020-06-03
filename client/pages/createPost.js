@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import MainNavBar from '../components/nav';
 import CreatePostForm from '../components/createPostFormTypes';
+import { saveState } from '../components/util/localStorage';
 import { Store } from '../components/util/store';
 import { Provider } from 'react-redux';
 

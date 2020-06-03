@@ -103,7 +103,7 @@ const typeDefs = gql`
     id: String!
     username: String!
     score: Int!
-    title: String
+    title: String!
     url: String
     body: String
     numberOfComments: Int!
@@ -167,6 +167,7 @@ const resolvers = {
       newPost.title = args.title;
       newPost.type = args.type; 
       newPost.score = 0; 
+      newPost.numberOfComments = 0;
 
       if (args.type == "text") {
         if (args.body != null) {
