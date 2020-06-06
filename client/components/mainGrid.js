@@ -35,7 +35,7 @@ const MainGridPost = () => (
 
       return data.getFrontPage.map(({ id, username, type, score, title, url, numberOfComments }) => (
         <tr>
-          <td  style={styles.MainGridTh}>
+          <td style={styles.MainGridTh}>
             <div style={styles.MainGridRowContainer}>
               <Score score={score} id={id}></Score>
               <div style={styles.MainGridTextContainer}>

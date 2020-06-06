@@ -4,15 +4,15 @@
 const CreatePostNavStyle = {
   "marginTop": "2%",
   "padding-top": "1%",
-  "marginLeft": "25%",
-  "marginRight": "25%"
+  "marginLeft": "33%",
+  "marginRight": "33%"
 };
 
 const FormPadding = {
   "marginTop": "2%",
   "marginBottom": "2%",
-  "marginLeft": "8%",
-  "marginRight": "8%",
+  "marginLeft": "15%",
+  "marginRight": "15%",
   "padding-top": "1%",
   "padding-bottom": "1%",
   "padding-left": "4%",
@@ -48,9 +48,10 @@ const LogInFormTitle = {
 const MainGrid = {
   "marginTop": "2%",
   "marginBottom": "2%",
-  "marginLeft": "5%",
-  "marginRight": "5%",
-  "width": "90% !important"
+  "marginLeft": "15%",
+  "marginRight": "15%",
+  // "width": "80% !important"
+  "width": "70%"
 };
 
 const MainGridDetails = {
@@ -75,9 +76,8 @@ const MainGridRowContainer = {
 const PostCard = {
   "marginTop": "2%",
   "marginBottom": "2%",
-  "marginLeft": "5%",
-  "marginRight": "5%",
-  "width": "90% !important"
+  "marginLeft": "15%",
+  "marginRight": "15%"
 };
 
 const VoteContainer = {
@@ -96,15 +96,78 @@ const MainGridTextContainer = {
   "marginLeft": "7px"
 };
 
+const PostContainer = {
+  "display": "flex"
+}
+
+const PostRightSection = {
+  "display": "flex", /* or inline-flex */
+  "flexDirection": "column",
+  "marginLeft": "7px"
+}
+
 const PostTextContainer = {
   "display": "flex", /* or inline-flex */
   "flexDirection": "column",
   "marginLeft": "7px"
 };
 
+const NewCommentFormPadding = {
+  "marginTop": "1%",
+  "marginBottom": "1%",
+  "marginLeft": "15%",
+  "marginRight": "15%",
+  "padding-top": "1%",
+  "padding-bottom": "1%"
+};
+
+
 const UpvoteButton = {
 
 };
+
+/**
+ * COMMENT SECTION
+ */
+
+const CommentSectionContainer = {
+  "marginTop": "2%",
+  "marginBottom": "2%",
+  "marginLeft": "15%",
+  "marginRight": "15%",
+  "width": "70%"
+};
+
+
+const CommentSectionTh = {
+  // "width": "100%"
+}
+
+const CommentSectionRowContainer = {
+  "display": "flex"
+  // "flexDirection": "row"
+}
+
+const CommentSectionItemMainContainer = {
+  "display": "flex",
+  "flexDirection": "column"
+}
+
+const CommentSectionTextContainer = {
+  "display": "flex", /* or inline-flex */
+  "flexDirection": "column",
+  "alignItems": "stretch",
+  "justifyContent": "center",
+  "alignContent": "start",
+  "marginLeft": "7px"
+};
+
+const CommentSectionItemUserContainer = {
+  "display": "flex", /* or inline-flex */
+  "alignContent": "start",
+  "marginLeft": "7px"
+};
+
 
 const styles = {
   CreatePostNavStyle: CreatePostNavStyle,
@@ -120,7 +183,16 @@ const styles = {
   PostCard: PostCard,
   VoteContainer: VoteContainer,
   MainGridTextContainer: MainGridTextContainer,
-  PostTextContainer: PostTextContainer
+  PostContainer: PostContainer,
+  PostRightSection: PostRightSection,
+  PostTextContainer: PostTextContainer,
+  CommentSectionContainer: CommentSectionContainer,
+  CommentSectionItemMainContainer: CommentSectionItemMainContainer,
+  CommentSectionTh: CommentSectionTh,
+  CommentSectionRowContainer: CommentSectionRowContainer,
+  CommentSectionTextContainer: CommentSectionTextContainer,
+  CommentSectionItemUserContainer: CommentSectionItemUserContainer,
+  NewCommentFormPadding: NewCommentFormPadding
 };
 
 export default styles; 

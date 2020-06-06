@@ -25,47 +25,26 @@ function renderComments(comments) {
   var commentDivs = [];
   for (var i = 0; i < comments.length; i++){
     commentDivs.push(
-    <tr>
-      <td  style={styles.MainGridTh}>
-        <div style={styles.MainGridRowContainer}>
-          <Score type='comment' score={comments[i].score} id={comments[i].id}></Score>
-          <div style={styles.MainGridTextContainer}>
-            {comments[i].comment}
+      <tr>
+        <td style={styles.MainGridTh}>
+          <div style={styles.MainGridRowContainer}>
+            <Score type='comment' score={comments[i].score} id={comments[i].id}></Score>
+            <div style={styles.CommentSectionTextContainer}>
+              <div style={styles.CommentSectionTextContainer}>
+                {comments[i].comment}
+              </div>
+              <div style={styles.CommentSectionItemUserContainer}>
+                {comments[i].username}
+              </div>
+            </div>
           </div>
-          <div>
-          {comments[i].username}
-          </div>
-        </div>
-      </td>
-    </tr>
-    )
+        </td>
+      </tr>
+      )
   }
   
   return commentDivs;
 }
-
-{/* <tr>
-  <td  style={styles.MainGridTh}>
-    <div style={styles.MainGridRowContainer}>
-      <Score score={score} id={id}></Score>
-      <div style={styles.MainGridTextContainer}>
-        {
-          type == 'text' ?
-            <Link href={{
-              pathname: '/post', query: { id: id }}
-            } >
-              <a style={styles.MainGridTitle}>{title}</a>
-            </Link> :
-            <a href={url} style={styles.MainGridTitle}>{title}</a>
-        }
-        <Link href={{ pathname: '/post', query: { id: id }}}>
-          <div style={styles.MainGridDetails}>small details and link to comments</div>
-        </Link>
-      </div>
-    </div>
-  </td>
-</tr> */}
-
 
 function CommentCard (props){
   console.log('gonna get comments');
@@ -83,14 +62,12 @@ function CommentCard (props){
   console.log({data});
   console.log(data);
   
-  // return renderComment(data.getComments.id, data.getComments.userId, data.getComments.score, data.getComments.comment);
   var cards = renderComments(data.getComments);
-  // return (<div>{cards}</div>)
-  return (<Table bordered hover style={styles.MainGrid} size="sm">
-  <tbody>
-    {cards}
-  </tbody>
-</Table>)
+  return (<Table bordered hover style={styles.CommentSectionContainer} size="sm">
+    <tbody>
+      {cards}
+    </tbody>
+  </Table>)
 };
 
 

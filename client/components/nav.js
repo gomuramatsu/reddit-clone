@@ -8,10 +8,9 @@ import { connect } from 'react-redux';
 import firebase from 'firebase';
 import firebaseConfig from './config/firebaseConfig';
 import UserAction from '../components/util/actions/userActions';
+import Router from 'next/router';
 
 function MainNavBar (props) {
-	console.log('drawing navBAR');
-	console.log(props);
 
 	// Initialize Firebase
     console.log(firebaseConfig);
@@ -31,8 +30,8 @@ function MainNavBar (props) {
 					<Button variant="outline-primary">Search</Button>
 				</Form>
 				<Nav className="ml-auto">
-					{ !props.loggedIn ? '' :<Nav.Link>Logged in as {props.username}</Nav.Link>}
-					{ !props.loggedIn ? '' :<Nav.Link href="/createPost">Create Post</Nav.Link>}
+					{!props.loggedIn ? '' :<Nav.Link>Logged in as {props.username}</Nav.Link>}
+					{!props.loggedIn ? '' :<Nav.Link onClick={() => Router.push('/createPost')}>Create Post</Nav.Link>}
 					
 					{ !props.loggedIn ? '' :
 						<Nav.Link onClick={
@@ -47,8 +46,8 @@ function MainNavBar (props) {
 							});
 						}}>Log Out</Nav.Link>
 					}
-					{ props.loggedIn ? '' :<Nav.Link href="/login">Log In</Nav.Link>}
-					{ props.loggedIn ? '' :<Nav.Link href="/signup">Sign up</Nav.Link>}
+					{ props.loggedIn ? '' :<Nav.Link onClick={() => Router.push('/login')}>Log In</Nav.Link>}
+					{ props.loggedIn ? '' :<Nav.Link onClick={() => Router.push('/signup')}>Sign up</Nav.Link>}
 				</Nav>
 			</Navbar.Collapse>
 		</Navbar>

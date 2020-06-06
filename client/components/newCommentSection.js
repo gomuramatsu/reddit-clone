@@ -21,29 +21,15 @@ function NewCommentSection (props){
 
   const [createComment, { data }] = useMutation(CREATE_COMMENT, {
     onCompleted: (returnData) => {
-      console.log(returnData);
-      console.log('hi');
-      console.log(props);
-      console.log('hi2');
-      // Router.push({
-      //   pathname: '/post',
-      //   query: { id: props.postId }
-      // });
       Router.reload();
     }
   });
 
-  return (<Form style={styles.FormPadding} onSubmit={
+  return (<Form style={styles.NewCommentFormPadding} onSubmit={
     e => {
-      console.log('submitted comment');
-      console.log(props);
-
-      
-
       e.preventDefault();
       var commentText = (commentInput.current == null ? '' : commentInput.current.value);
       createComment({ variables: { username: props.username, postId:props.postId, comment: commentText } });
-      console.log(commentText);
     }
   }>
     <Form.Group controlId="formBody"> 

@@ -24,9 +24,6 @@ const CREATE_POST = gql`
 `;
 
 function CreatePostFormWithHook(props) {
-
-  console.log(props);
-
   var titleInput = React.createRef(); 
   var bodyInput = React.createRef(); 
   var urlInput = React.createRef(); 
