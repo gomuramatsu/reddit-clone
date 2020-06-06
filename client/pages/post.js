@@ -50,15 +50,17 @@ function PostCard (props){
   return renderPost(data.getPost.id, data.getPost.username, data.getPost.score, data.getPost.title, data.getPost.body);
 };
 
-function renderPost(id, score, title, body) {
+function renderPost(id, username, score, title, body) {
   return (
     <Card style={styles.PostCard}>
-      <Card.Body style={styles.MainGridRowContainer}>
+      <Card.Body style={styles.PostContainer}>
         <Score score={score} id={id}></Score>
-        <Card.Title  style={styles.PostTextContainer} >{title}</Card.Title>
-        <Card.Text>
-          {body}
-        </Card.Text>
+        <div style={styles.PostRightSection}>
+          <Card.Title  style={styles.PostTextContainer} >{title}</Card.Title>
+          <Card.Text style={styles.PostTextContainer} >
+            {body}
+          </Card.Text>
+        </div>
       </Card.Body>
     </Card>
   );
@@ -84,11 +86,9 @@ function Post() {
       <Provider store={Store} >
         <MainNavBar></MainNavBar>
         <ApolloHooksProvider client={client}>
-          <div>
             <PostCard postId={router.query.id}></PostCard>
-            <CommentCard postId={router.query.id}></CommentCard>
             <NewCommentSection postId={router.query.id}></NewCommentSection>
-          </div>
+            <CommentCard postId={router.query.id}></CommentCard>
         </ApolloHooksProvider>
       </Provider>
     </ApolloProvider>

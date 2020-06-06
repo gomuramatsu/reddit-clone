@@ -23,7 +23,6 @@ const ADD_COMMENT_VOTE = gql`
 
 class Score extends Component {
 	constructor(props){
-		console.log(props);
 		super(props);
 		this.mutate = props.client.mutate;
 		this.onClickVoteArrow = this.onClickVoteArrow.bind(this);
