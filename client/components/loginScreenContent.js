@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import styles from "./style";
 import firebase from 'firebase';
-import firebaseConfig from './config/firebaseConfig';
+import firebaseConfig from '../config/firebaseConfig';
 import Router from 'next/router';
 import { connect } from 'react-redux';
 import UserAction from '../components/util/actions/userActions';

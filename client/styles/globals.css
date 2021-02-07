@@ -1,0 +1,110 @@
+p {
+    font-weight: 200;
+    font-size: small;
+    color: black;
+}
+
+a {
+    font-weight: 200;
+    font-size: small;
+    color: black;
+}
+
+input {
+    font-weight: 200;
+    font-size: small;
+    color: black;
+}
+
+textarea {
+    border-radius: 8px;
+    font-weight: 200;
+    font-size: small;
+    color: black;
+    padding: 15px 2% 15px 2%;
+    margin: 15px 0 15px 0;
+    border: 1px solid #D6D6D6;
+}
+
+/* ===== FRONT PAGE ===== */
+
+.clear { 
+    clear:both;
+}
+
+.mainContainer {
+    width:70%;
+    margin: 2% 15% 2% 15%;
+}
+
+.postCardContainer {
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    padding: 15px 2% 15px 2%;
+    margin: 15px 0 15px 0;
+    border: 1px solid #D6D6D6;
+}
+
+.voteContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 16px 0 0;
+}
+
+.gedditContainer:hover{
+    font-weight: 200;
+    font-size: xx-large;
+    color: black;
+    padding-right: 24px;
+    text-decoration: none;
+}
+
+.gedditContainer {
+    font-weight: 200;
+    font-size: xx-large;
+    color: black;
+    padding-right: 24px;
+}
+
+.postTitleFont {
+    font-weight: 400;
+    font-size: large;
+    color: black;
+}
+
+.postBodyFont {
+    font-weight: 200;
+    font-size: medium;
+    color: black;
+}
+
+.postUserFont {
+    font-weight: 200;
+    font-size: small;
+    color: black;
+}
+
+.postCommentFont {
+    font-weight: 200;
+    font-size: small;
+    color: black;
+}
+
+.scoreNumberFont {
+    font-weight: 400;
+    font-size: medium;
+    color: black;
+}
+
+.textAreaContainer {
+    width: 100%;
+    margin: 5px 0 10px 0;
+}
+
+.submitContainer {
+    /* width: 100%; */
+    float: right;
+    margin: 2px 0 10px 0;
+}

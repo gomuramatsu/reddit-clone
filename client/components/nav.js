@@ -6,7 +6,7 @@ import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
-import firebaseConfig from './config/firebaseConfig';
+import firebaseConfig from '../config/firebaseConfig';
 import UserAction from '../components/util/actions/userActions';
 import Router from 'next/router';
 
@@ -20,9 +20,12 @@ function MainNavBar (props) {
 
 	return (
 		<Navbar bg="light" expand="lg">
-			<Navbar.Brand href={"/"}>
-				Geddit
+			<Navbar.Brand className="gedditFont" href={"/"}>
+				
 			</Navbar.Brand>
+			<a className="gedditContainer" href={"/"} >
+				Geddit
+			</a>
 			<Navbar.Toggle aria-controls="basic-navbar-nav" />
 			<Navbar.Collapse id="basic-navbar-nav">
 				<Form inline>

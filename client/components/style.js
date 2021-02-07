@@ -45,15 +45,6 @@ const LogInFormTitle = {
  * FRONT PAGE
  */
 
-const MainGrid = {
-  "marginTop": "2%",
-  "marginBottom": "2%",
-  "marginLeft": "15%",
-  "marginRight": "15%",
-  // "width": "80% !important"
-  "width": "70%"
-};
-
 const MainGridDetails = {
   "fontSize": "small"
 }
@@ -67,7 +58,14 @@ const MainGridTh = {
 }
 
 const MainGridRowContainer = {
-  "display": "flex"
+  "display": "flex",
+  // "background-color": "red"
+}
+
+const GridItem = {
+  // "display": "flex",
+  // "background-color": "red",
+  "border-radius": "5px"
 }
 
 /**
@@ -83,16 +81,16 @@ const PostCard = {
 const VoteContainer = {
   "display": "flex", /* or inline-flex */
   "flexDirection": "column",
-  "alignItems": "center",
-  "justifyContent": "center"
+  // "alignItems": "center",
+  // "justifyContent": "center"
 };
 
 const MainGridTextContainer = {
-  "display": "flex", /* or inline-flex */
-  "flexDirection": "column",
-  "alignItems": "stretch",
-  "justifyContent": "center",
-  "alignContent": "start",
+  // "display": "flex", /* or inline-flex */
+  // "flexDirection": "column",
+  // "alignItems": "stretch",
+  // "justifyContent": "center",
+  // "alignContent": "start",
   "marginLeft": "7px"
 };
 
@@ -171,11 +169,12 @@ const CommentSectionItemUserContainer = {
 
 const styles = {
   CreatePostNavStyle: CreatePostNavStyle,
-  MainGrid: MainGrid,
+  // MainGrid: MainGrid,
   MainGridTitle: MainGridTitle,
   MainGridDetails: MainGridDetails,
   MainGridTh: MainGridTh,
   MainGridRowContainer: MainGridRowContainer,
+  GridItem: GridItem,
   FormPadding: FormPadding,
   LoginFormPadding: LoginFormPadding,
   LoginFormButton: LoginFormButton,

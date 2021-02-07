@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import styles from "../components/style";
+import styles from "./style";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import gql from "graphql-tag";
@@ -25,22 +25,24 @@ function NewCommentSection (props){
     }
   });
 
-  return (<Form style={styles.NewCommentFormPadding} onSubmit={
-    e => {
-      e.preventDefault();
-      var commentText = (commentInput.current == null ? '' : commentInput.current.value);
-      createComment({ variables: { username: props.username, postId:props.postId, comment: commentText } });
-    }
-  }>
-    <Form.Group controlId="formBody"> 
-        <Form.Control ref={commentInput} as="textarea" rows="4" placeholder="Enter comment"/>
-    </Form.Group>
-    <Button variant="primary" type="submit">
-        Submit
-    </Button>
-  </Form>)
+  return (
+    <form onSubmit={
+      e => {
+        e.preventDefault();
+        var commentText = (commentInput.current == null ? '' : commentInput.current.value);
+        createComment({ variables: { username: props.username, postId:props.postId, comment: commentText } });
+      }
+    }>
+      <textarea className="textAreaContainer" ref={commentInput} rows="4" placeholder="Enter comment"/>
+      <div>
+        <Button className="submitContainer" variant="primary" type="submit">
+            Submit
+        </Button>
+        <div className="clear"></div>
+      </div>
+    </form>
+  )
 };
-
 
 const mapStateToProps = function(state) {
   return {

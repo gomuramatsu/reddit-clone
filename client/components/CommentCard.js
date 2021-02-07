@@ -1,11 +1,11 @@
 import React, {Component} from "react";
-import MainNavBar from '../components/nav';
+import MainNavBar from './nav';
 import Card from 'react-bootstrap/Card'
 import Table from 'react-bootstrap/Table';
 import gql from "graphql-tag";
 import { useQuery } from '@apollo/react-hooks';
-import styles from "../components/style";
-import Score from '../components/score';
+import styles from "./style";
+import Score from './score';
 
 
 const GET_COMMENTS = gql`
@@ -25,21 +25,13 @@ function renderComments(comments) {
   var commentDivs = [];
   for (var i = 0; i < comments.length; i++){
     commentDivs.push(
-      <tr>
-        <td style={styles.MainGridTh}>
-          <div style={styles.MainGridRowContainer}>
-            <Score type='comment' score={comments[i].score} id={comments[i].id}></Score>
-            <div style={styles.CommentSectionTextContainer}>
-              <div style={styles.CommentSectionTextContainer}>
-                {comments[i].comment}
-              </div>
-              <div style={styles.CommentSectionItemUserContainer}>
-                {comments[i].username}
-              </div>
-            </div>
-          </div>
-        </td>
-      </tr>
+      <div className="postCardContainer">
+        <Score type='comment' score={comments[i].score} id={comments[i].id}></Score>
+        <div>
+          <div className="postBodyFont">{comments[i].comment}</div>
+          <div className="postUserFont">{comments[i].username}</div>
+        </div>
+      </div>
       )
   }
   
@@ -62,14 +54,7 @@ function CommentCard (props){
   console.log({data});
   console.log(data);
   
-  var cards = renderComments(data.getComments);
-  return (<Table bordered hover style={styles.CommentSectionContainer} size="sm">
-    <tbody>
-      {cards}
-    </tbody>
-  </Table>)
+  return renderComments(data.getComments);
 };
-
-
 
 export default CommentCard;

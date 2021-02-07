@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import styles from "./style";
 import { withApollo } from 'react-apollo';
 import gql from "graphql-tag";
+import up from '../styles/assets/up.png';
+import down from '../styles/assets/down.png';
 
 const ADD_VOTE = gql`
   mutation addVote ($id: String!, $vote: Int!){
@@ -45,11 +47,10 @@ class Score extends Component {
 
 	render() {
 		return (
-			<div style={styles.VoteContainer}>
-                <img onClick={() => this.onClickVoteArrow(1)} src={require('./assets/up.png')}  />
-				
-                <div>{this.props.score}</div>
-				<img onClick={() => this.onClickVoteArrow(-1)} src={require('./assets/down.png')}  />
+			<div className="voteContainer">
+				<img onClick={() => this.onClickVoteArrow(1)} src={up}  />
+                <div className="scoreNumberFont">{this.props.score}</div>
+				<img onClick={() => this.onClickVoteArrow(-1)} src={down}  />
             </div>
 		)
 	}

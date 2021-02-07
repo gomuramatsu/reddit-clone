@@ -8,10 +8,9 @@ import gql from "graphql-tag";
 import { ApolloProvider as ApolloHooksProvider } from '@apollo/react-hooks' // https://github.com/apollographql/apollo-client/issues/2042#issuecomment-509041949
 import styles from "../components/style";
 import Score from '../components/score';
-import CommentCard from '../components/commentSection';
-import NewCommentSection from '../components/newCommentSection';
+import CommentCard from '../components/CommentCard';
+import NewCommentSection from '../components/NewCommentSection';
 import { useRouter } from 'next/router';
-
 import { saveState } from '../components/util/localStorage';
 import { Provider } from 'react-redux';
 import { Store } from '../components/util/store';
@@ -52,17 +51,14 @@ function PostCard (props){
 
 function renderPost(id, username, score, title, body) {
   return (
-    <Card style={styles.PostCard}>
-      <Card.Body style={styles.PostContainer}>
-        <Score score={score} id={id}></Score>
-        <div style={styles.PostRightSection}>
-          <Card.Title  style={styles.PostTextContainer} >{title}</Card.Title>
-          <Card.Text style={styles.PostTextContainer} >
-            {body}
-          </Card.Text>
-        </div>
-      </Card.Body>
-    </Card>
+    <div className="postCardContainer">
+      <Score score={score} id={id}></Score>
+      <div>
+        <div className="postTitleFont">{title}</div>
+        <div className="postUserFont">posted by {username}</div>
+        <div className="postBodyFont">{body}</div>
+      </div>
+    </div>
   );
 }
 
@@ -86,9 +82,11 @@ function Post() {
       <Provider store={Store} >
         <MainNavBar></MainNavBar>
         <ApolloHooksProvider client={client}>
-            <PostCard postId={router.query.id}></PostCard>
-            <NewCommentSection postId={router.query.id}></NewCommentSection>
-            <CommentCard postId={router.query.id}></CommentCard>
+            <div className="mainContainer">
+              <PostCard postId={router.query.id}></PostCard>
+              <NewCommentSection postId={router.query.id}></NewCommentSection>
+              <CommentCard postId={router.query.id}></CommentCard>
+            </div>
         </ApolloHooksProvider>
       </Provider>
     </ApolloProvider>
