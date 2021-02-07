@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+// import Button from 'react-bootstrap/Button';
 import styles from "./style";
 import firebase from 'firebase';
 import firebaseConfig from '../config/firebaseConfig';
@@ -8,6 +8,8 @@ import Router from 'next/router';
 import { connect } from 'react-redux';
 import UserAction from '../components/util/actions/userActions';
 import { saveState } from '../components/util/localStorage';
+import Input from './Input';
+import Button from './Button';
 
 function LoginScreenContent (props) {
     var userInput = React.createRef(); 
@@ -22,7 +24,7 @@ function LoginScreenContent (props) {
     console.log(props);
 
     return (
-        <Form style={styles.LoginFormPadding} onSubmit={
+        <form className="loginContainer" onSubmit={
             e => {
                 e.preventDefault();
                 var user = (userInput.current == null ? '' : userInput.current.value);
@@ -51,19 +53,13 @@ function LoginScreenContent (props) {
                 })
 
             }
-            }>
-            <h3 style={styles.LogInFormTitle}>Log In</h3>
-            <Form.Group controlId="loginFormUser">
-                <Form.Control ref={userInput} type="text" placeholder="Email"/>
-            </Form.Group>
-            <Form.Group controlId="loginFormPass"> 
-                <Form.Control ref={passInput} type="password" placeholder="Password"/>
-            </Form.Group>
-            <Button style={styles.LoginFormButton} variant="primary" type="submit">
-                Log In
-            </Button>
+        }>
+            <h1 style={styles.LogInFormTitle}>Log In</h1>
+            <Input additionalClassName="loginTextInput" ref={userInput} type="text" placeholder="Email"/>
+            <Input additionalClassName="loginTextInput" ref={passInput} type="password" placeholder="Password"/>
+            <Button additionalClassName="loginSubmitButton" style={styles.LoginFormButton} text="Log In" variant="primary" type="submit" />
             <a href="/signup">Sign up here</a>
-            </Form>
+        </form>
     )
     
 }

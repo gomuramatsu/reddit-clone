@@ -1,7 +1,8 @@
 import React, {Component} from "react";
 import styles from "./style";
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+// import Button from 'react-bootstrap/Button';
+import Button from './Button';
 import gql from "graphql-tag";
 import { useMutation } from '@apollo/react-hooks';
 import { connect } from 'react-redux';
@@ -28,6 +29,7 @@ function NewCommentSection (props){
   return (
     <form onSubmit={
       e => {
+        console.log('submitted');
         e.preventDefault();
         var commentText = (commentInput.current == null ? '' : commentInput.current.value);
         createComment({ variables: { username: props.username, postId:props.postId, comment: commentText } });
@@ -35,9 +37,10 @@ function NewCommentSection (props){
     }>
       <textarea className="textAreaContainer" ref={commentInput} rows="4" placeholder="Enter comment"/>
       <div>
-        <Button className="submitContainer" variant="primary" type="submit">
-            Submit
-        </Button>
+        <div className="submitContainer">
+          <Button text="Submit">
+          </Button>
+        </div>
         <div className="clear"></div>
       </div>
     </form>

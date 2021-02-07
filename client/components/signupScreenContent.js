@@ -1,9 +1,9 @@
 import React, {Component} from "react";
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import Input from './Input';
+import Button from './Button';
 import styles from "./style";
 import firebase from 'firebase';
-import firebaseConfig from './config/firebaseConfig';
+import firebaseConfig from '../config/firebaseConfig';
 import Router from 'next/router';
 import UserAction from '../components/util/actions/userActions';
 import { connect } from 'react-redux';
@@ -52,7 +52,7 @@ function SignUpScreenContent(props) {
     console.log(props);
 
     return (
-            <Form style={styles.LoginFormPadding} onSubmit={
+            <form  className="loginContainer" onSubmit={
                 e => {
                     e.preventDefault();
                     var username = (usernameInput.current == null ? '' : usernameInput.current.value);
@@ -103,25 +103,15 @@ function SignUpScreenContent(props) {
                         });
                     }
                 }
-                }>
+            }>
                 <h3 style={styles.LogInFormTitle}>Sign Up</h3>
-                <Form.Group controlId="loginFormUser">
-                    <Form.Control ref={usernameInput} type="text" placeholder="Username"/>
-                </Form.Group>
-                <Form.Group controlId="loginFormEmail">
-                    <Form.Control ref={emailInput} type="email" placeholder="Email"/>
-                </Form.Group>
-                <Form.Group controlId="loginFormPass"> 
-                    <Form.Control ref={passInput} type="password" placeholder="Password"/>
-                </Form.Group>
-                <Form.Group controlId="loginFormPassConfirmation"> 
-                    <Form.Control ref={passConfirmationInput} type="password" placeholder="Confirm Password"/>
-                </Form.Group>
-                <Button style={styles.LoginFormButton} variant="primary" type="submit">
-                    Log In
-                </Button>
+                <Input additionalClassName="loginTextInput" type="text" placeholder="Username"/>
+                <Input additionalClassName="loginTextInput" ref={emailInput} type="text" placeholder="Email"/>
+                <Input additionalClassName="loginTextInput" ref={passInput} type="password" placeholder="Password"/>
+                <Input additionalClassName="loginTextInput" ref={passConfirmationInput} type="password" placeholder="Confirm Password"/>
+                <Button additionalClassName="loginSubmitButton" text="Sign Up" type="submit" />
                 <a href="/login">Log in here</a>
-            </Form>
+            </form>
     )
 }
 
