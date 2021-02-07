@@ -17,7 +17,7 @@ input {
 }
 
 textarea {
-    border-radius: 8px;
+    border-radius: 10px;
     font-weight: 200;
     font-size: small;
     color: black;
@@ -38,7 +38,7 @@ textarea {
 }
 
 .postCardContainer {
-    border-radius: 8px;
+    border-radius: 10px;
     display: flex;
     flex-direction: row;
     padding: 15px 2% 15px 2%;
@@ -107,4 +107,24 @@ textarea {
     /* width: 100%; */
     float: right;
     margin: 2px 0 10px 0;
+}
+
+.regularButton {
+    font-weight: 300;
+    font-size: medium;
+    color: white;
+    background-color: rgb(36, 105, 196);
+    padding: 10px 16px 10px 16px;
+    border-radius: 10px;
+    border: 1px solid white;
+}
+
+.textInput {
+    padding: 10px 16px 10px 16px;
+    border-radius: 10px;
+    border: 1px solid #D6D6D6;
+}
+
+.textInput.navbar {
+    margin: 0 18px 0 0;
 }

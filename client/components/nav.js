@@ -3,7 +3,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
-import Button from 'react-bootstrap/Button';
+import Button from './Button';
+import Input from './Input';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
 import firebaseConfig from '../config/firebaseConfig';
@@ -29,8 +30,8 @@ function MainNavBar (props) {
 			<Navbar.Toggle aria-controls="basic-navbar-nav" />
 			<Navbar.Collapse id="basic-navbar-nav">
 				<Form inline>
-					<FormControl type="text" placeholder="Search Reddit" className="mr-sm-2" />
-					<Button variant="outline-primary">Search</Button>
+					<Input type="text" placeholder="Search Reddit" additionalClassName="navbar"/>
+					<Button text="Search"></Button>
 				</Form>
 				<Nav className="ml-auto">
 					{!props.loggedIn ? '' :<Nav.Link>Logged in as {props.username}</Nav.Link>}
